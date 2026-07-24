@@ -1,37 +1,14 @@
-/* =====================================================================
-   DATA.JS — Arara Portfolio persistent content store
-   =====================================================================
-   This file holds every piece of editable text, link, skill, and
-   project on the site. It is the permanent, committed source of truth
-   for the portfolio — this is what loads when the page (or the
-   GitHub Pages-hosted site) first opens, in any browser, for anyone.
 
-   HOW IT GETS UPDATED
-   Open index.html, click "Edit" (PIN: 1234), and make your changes.
-   Edits auto-save to this browser automatically. To make them
-   permanent in this file, open the browser console and run
-   copy(JSON.stringify(collectAllData())), then paste the result in
-   place of the object below, or ask a developer to wire the
-   connectDataFile()/downloadDataFile() helpers in dynamic.js back up
-   to a button if you'd like one-click saving to disk again.
-
-   HAND-EDITING THIS FILE
-   You can also edit the values below directly — it is a plain
-   JavaScript object. If you do, open the site afterward in a private/
-   incognito window (or clear this site's local storage) so your
-   browser does not overwrite your hand edits with an older cached
-   copy.
-   ===================================================================== */
 window.SITE_DATA = {
-  "heroName": "Arara",
-  "heroTagline": "Computer Science Student · Aspiring Full-Stack Developer",
-  "heroUni": "🎓 State University — Class of 2026",
-  "fullName": "Arara",
-  "dob": "March 15, 2003",
-  "nationality": "American",
-  "languages": "English, Spanish, French",
-  "major": "B.Tech Computer Science &amp; Engineering",
-  "rollNo": "CS-2023-0847",
+  "heroName": "Rawnak",
+  "heroTagline": "Student - Father - Teacher",
+  "heroUni": "🎓 RTM University — Class of 1967",
+  "fullName": "Rawnak Rawnak",
+  "dob": "Joctober 35th, 1967",
+  "nationality": "RTMIAN",
+  "languages": "English or Spanish",
+  "major": "Department of Social Awareness and ADHD",
+  "rollNo": "67676767676767-7-1",
   "bio": "I'm a passionate Computer Science student in my junior year, deeply interested in web development, machine learning, and cloud computing. I love building things that live on the internet. When I'm not coding, you'll find me reading about new tech trends, contributing to open-source projects, or playing basketball with friends.",
   "semester": "5th Sem",
   "cgpa": "8.7",
