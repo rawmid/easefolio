@@ -170,8 +170,8 @@ Edit the `data.js` file to change the default content that loads for every visit
 
 | Technology | Purpose |
 | --- | --- |
-| HTML5 | Page structure |
-| CSS3 | Glassmorphism, 3D effects, animations, responsive layout |
+| HTML | Page structure |
+| CSS | Glassmorphism, animations, responsive layout |
 | JavaScript (Vanilla ) | Interactions, edit mode, data management |
 | TailwindCSS (CDN) | Utility-first styling |
 | Lucide Icons | Icon library |
@@ -182,12 +182,6 @@ Edit the `data.js` file to change the default content that loads for every visit
 ## Browser Support
 
 Works on all modern browsers (Chrome, Firefox, Safari, Edge). No build step or server required.
-
----
-
-## License
-
-MIT License. Feel free to fork, customize, and use for your own portfolio.
 
 ---
 
