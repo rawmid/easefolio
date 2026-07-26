@@ -1,4 +1,4 @@
-# Ra — Rawnak's Portfolio
+# Ra — EaseFolio
 
 A static, data-driven portfolio site built with HTML, CSS, and JavaScript that can be deployed directly to GitHub Pages. The project features an optional **Admin Mode** that allows visually editing the entire site—including content, themes, colors, fonts, layout, images, and projects—with a live preview. Changes are published by securely committing updates directly to the repository.
 
