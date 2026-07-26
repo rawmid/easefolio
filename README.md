@@ -1,188 +1,112 @@
-# Student Portfolio Website
+# Ra — Rawnak's Portfolio
 
-A sleek, modern, single-page portfolio website built with vanilla HTML, CSS, and JavaScript. Features a glassmorphic dark theme, 3D interactive elements, animated particles, and a fully editable content system — all without any framework dependencies.
-
-![GitHub Pages Ready](https://img.shields.io/badge/GitHub_Pages-Ready-success)![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-No_Framework-blue)![License](https://img.shields.io/badge/License-MIT-green)
-
----
+A static, data-driven portfolio site built with HTML, CSS, and JavaScript that can be deployed directly to GitHub Pages. The project features an optional **Admin Mode** that allows visually editing the entire site—including content, themes, colors, fonts, layout, images, and projects—with a live preview. Changes are published by securely committing updates directly to the repository.
 
 ## Features
 
-**Design & Visuals**
+### Public Portfolio Site
 
-- Dark glassmorphic UI with animated gradient background
+The public-facing site is entirely static and data-driven, rendering its content from a central `data.json` file.
 
-- Floating particle system
+- **Dynamic Rendering**: All sections (Hero, About, Skills, Projects, Contact, etc.) are populated directly from `data.json` using client-side JavaScript.
 
-- 3D card tilt effects on hover
+- **Modern UI/UX**: Features a glassmorphism design, animated background particles, 3D hover effects, and a responsive layout using Tailwind CSS.
 
-- 3D button press effects with mouse tracking
+- **Live Information**: Displays real-time data such as local time, date, and semester/CGPA updates.
 
-- Shimmer text animation on the hero name
+- **Customizable**: Easily swap themes, fonts, and colors by modifying CSS variables or the admin panel.
 
-- Glowing orbit rings and floating tech cubes
+### Admin Mode (Visual Editor)
 
-- Fully responsive — works on mobile, tablet, and desktop
+Admin Mode provides a secure, browser-based interface for managing the portfolio without touching code.
 
-- Smooth scroll navigation with active section highlighting
+- **Secure Authentication**: Uses GitHub OAuth to verify admin identity against a server-side allow-list, issuing an `httpOnly` session cookie.
 
-- Slide-up scroll reveal animations
+- **Visual Editor**: A left-hand panel allows editing of all site content, from basic text fields to complex project entries.
 
-**Customization & Theming**
+- **Live Preview**: A right-hand iframe renders the site in real-time using the same codebase as the public site, ensuring perfect accuracy.
 
-- 8 built-in theme color presets (Violet, Blue, Emerald, Rose, Amber, Cyan, Pink, Indigo)
+- **Draft Workflow**: Changes are kept in memory until published. Refreshing or leaving the page discards drafts, preventing accidental saves.
 
-- Switch themes instantly from the palette button in the navbar
-
-- Theme colors persist across sessions via local storage
-
-**Editable Content (Edit Mode)**
-
-- PIN-protected edit mode (default PIN: `1234`)
-
-- Edit all text fields directly on the page (inline editing)
-
-- Upload and change profile photo (persists locally or via `data.js`)
-
-- Add, remove, and reorder skills with proficiency bars
-
-- Add and remove tool/technology tags
-
-- Add and delete project cards dynamically
-
-- Edit social media and project links
-
-- Contact form with toast notification
-
-**Data Persistence**
-
-- Content is driven by `data.js` — the single source of truth
-
-- Edits auto-save to browser `localStorage` as a safety net
-
-- Changes can be committed back to `data.js` for permanent deployment
-
-- Clear structure makes it easy to hand-edit the data file
-
----
+- **Secure Publishing**: Publishing changes sends the updated data to a separate Node.js backend, which securely commits the changes to the repository using a fine-grained Personal Access Token (PAT ).
 
 ## Project Structure
 
 ```
-├── index.html          # Main HTML structure and layout
-├── styles.css          # All styling — glassmorphism, 3D effects, animations
-├── script.js           # Core interactions — particles, clock, scroll, 3D effects
-├── dynamic.js          # Edit mode, data persistence, skill/project management
-├── data.js             # SITE_DATA — all editable content lives here
-└── assets/
+ra_project/
+├── index.html          # Main page markup (containers filled by script.js)
+├── script.js           # Renders data.json into the DOM; handles UI interactions
+├── styles.css          # Main stylesheet, theme variables, and animations
+├── data.json           # Central database for all editable site content
+├── admin.html          # Admin editor interface and login gate
+├── admin.js            # Admin editor logic and API communication
+├── admin.css           # Styling for the admin interface
+└── assets/             # Static assets (images, project thumbnails)
     ├── images/
-    │   └── profile.jpg # Profile photo (replace with your own)
-    └── projects/       # Project screenshots/thumbnails
+    └── projects/
+
+server/                 # Backend service for Admin Mode (requires separate deployment)
+├── server.js           # Express backend handling auth and publishing
+├── package.json        # Node.js dependencies
+└── .env.example        # Required environment variables template
 ```
 
----
+## Getting Started
 
-## Quick Start
+### Running the Public Site
 
-1. Clone this repository:
+Since the portfolio is a static site, you can run it immediately:
 
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
-   ```
+1. Clone or download this repository.
 
-1. Open `data.js` and replace the `SITE_DATA` object with your own information (name, bio, skills, projects, links, etc. ).
+1. Navigate to the `ra_project` directory.
 
-1. Replace `assets/images/profile.jpg` with your own profile photo.
+1. Open `index.html` in your web browser, or deploy the contents of this folder to GitHub Pages.
 
-1. Open `index.html` in a browser — that's it!
+### Setting Up Admin Mode
 
-   Or deploy to **GitHub Pages**: go to your repo settings → Pages → select the `main` branch and save.
+The Admin Mode requires a backend server to handle GitHub OAuth and secure repository commits.
 
----
+1. **Create GitHub Credentials**:
+  - Create a GitHub OAuth App for login.
+  - Create a fine-grained Personal Access Token (PAT) with `Contents: Read and write` permissions for your repository.
 
-## How to Customize Your Content
+1. **Deploy the Backend**:
+  - Deploy the `server/` directory to a Node.js hosting provider (e.g., Render, Railway, Fly.io).
+  - Configure the environment variables based on `.env.example`.
 
-Edit the `data.js` file to change the default content that loads for every visitor. Key fields:
+1. **Connect Frontend to Backend**:
+  - Update the `BACKEND_URL` in `admin.js` to point to your deployed server.
+  - Update the Authorization callback URL in your GitHub OAuth App.
 
-| Field | Description |
-| --- | --- |
-| `heroName` | Name displayed in the hero section |
-| `heroTagline` | Subtitle below the hero name |
-| `heroUni` | University and graduation year |
-| `fullName` | Full name shown in the About section |
-| `dob` | Date of birth |
-| `nationality` | Nationality |
-| `languages` | Spoken languages |
-| `major` | Major / Department |
-| `rollNo` | Student roll number |
-| `bio` | Personal bio / story |
-| `semester` | Current semester |
-| `cgpa` | CGPA |
-| `proj1title` – `proj3desc` | Project titles and descriptions |
-| `homeAddress` | Home address |
-| `email` | Email address |
-| `phone` | Phone number |
-| `uniAddress` | University address |
-| `_skills` | Array of skill names and proficiency levels |
-| `_tools` | Array of tool/technology names |
-| `link__proj1-preview` – `link__social-x` | External links for projects and social profiles |
-
-> **Tip:** After editing `data.js`, open the site in an incognito window to avoid your browser's cached `localStorage` overwriting your changes.
-
----
-
-## How to Add Project Screenshots
-
-1. Place an image in `assets/projects/`, e.g. `assets/projects/chatbot.png`.
-
-1. In `index.html`, find the project card inside `#projectsGrid` and replace the icon block:
-
-   ```html
-   <!-- before -->
-   <div class="h-40 overflow-hidden flex items-center justify-center" ...>
-       <i data-lucide="message-square-code" ...></i>
-   </div>
-   
-   <!-- after -->
-   <div class="h-40 overflow-hidden">
-       <img src="assets/projects/chatbot.png" class="w-full h-full object-cover">
-   </div>
-   ```
-
----
-
-## Deploying to GitHub Pages
-
-1. Push this repo to GitHub.
-
-1. Go to **Settings** → **Pages**.
-
-1. Under **Source**, select **Deploy from a branch**.
-
-1. Choose the `main` branch and `/root` folder, then click **Save**.
-
-1. Your portfolio will be live at `https://your-username.github.io/your-repo-name/`.
-
----
+*For detailed instructions, refer to the *[*Server README*](server/README.md)*.*
 
 ## Tech Stack
 
-| Technology | Purpose |
-| --- | --- |
-| HTML | Page structure |
-| CSS | Glassmorphism, animations, responsive layout |
-| JavaScript (Vanilla ) | Interactions, edit mode, data management |
-| TailwindCSS (CDN) | Utility-first styling |
-| Lucide Icons | Icon library |
-| Inter Font | Typography |
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
 
----
+- **Styling**: Tailwind CSS (via CDN), Custom CSS Variables for theming
 
-## Browser Support
+- **Icons**: Lucide Icons
 
-Works on all modern browsers (Chrome, Firefox, Safari, Edge). No build step or server required.
+- **Backend**: Node.js, Express.js
 
----
+- **Authentication**: GitHub OAuth, JSON Web Tokens (JWT)
 
-*Built with vanilla code and lots of coffee.*
+- **Deployment**: GitHub Pages (Frontend), Node.js Host (Backend)
+
+## Customizing Content
+
+The entire website's content is controlled by the `data.json` file. You can modify the JSON directly or use the Admin Mode to update:
+
+- Site title, theme colors, and fonts
+
+- Hero section details (name, tagline, profile picture)
+
+- Personal information (About section, skills, contact details)
+
+- Project galleries and social links
+
+## License
+
+This project is open-source and available for personal and commercial use.
